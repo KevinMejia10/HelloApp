@@ -8,16 +8,54 @@ public class Game {
 
     public void start() {
         ConfigUtils.println("Welcome to the game!");
-        String playerName = ConfigUtils.askString("Enter your name: ");
-        int age= ConfigUtils.askInt("Enter your age: ");
-        player = new Player(playerName, age);
-        ConfigUtils.println("Character created successfully!");
+        String name = configUtils.askString("Enter your character's name: ");
+        int age = configUtils.askInt("Enter your character's age: ");
+        player = new Player(name, age);
+        configUtils.println("Character created successfully!");
     }
 
     public void firstDecision() {
-        ConfigUtils.println("You are in a dark forest. You can go left or right?");
-
+        configUtils.println("You are in a dark forest. You can go left or right.");
+        
         while (true) {
-            String decission = ConfigUtils.askString("Enter your decision (left/right): ").toLowerCase();
+            String decission = configUtils.askString("What do you want to do? (explore/ check inventory/ check stats/ exit)");
             
+            if (decission.equalsIgnoreCase("explore")) {
+                configUtils.println("You explore the forest and find a treasure chest!");
+                player.gainGold(100);
+                configUtils.println("You gained 100 gold!");
+            } else if (decission.equalsIgnoreCase("check inventory")) {
+                player.getInventario();
+            } else if (decission.equalsIgnoreCase("check stats")) {
+                configUtils.println("Name: " + player.getName());
+                configUtils.println("Age: " + player.getEdad());
+            } else if (decission.equalsIgnoreCase("exit")) {
+                configUtils.closeScanner();
+                break;
+            } else {
+                configUtils.println("Invalid choice. Please try again.");
+            }
+        }
     }
+
+    private void explore(){
+        String direction = configUtils.askString('Do you want to explore north, south, east or west?');
+
+        switch(direction.toLowerCase()){
+            case "north":
+                configUtils.println("You find a treasure chest!");
+                break;
+            case "south":
+                configUtils.println("You encounter a wild beast!");
+                break;
+            case "east":
+                configUtils.println("You find a hidden path!");
+                break;
+            case "west":
+                configUtils.println("You find a mysterious cave!");
+                break;
+            default:
+                configUtils.println("Invalid direction. Please try again.");
+        }
+    }
+}

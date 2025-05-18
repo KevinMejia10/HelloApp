@@ -50,9 +50,9 @@ public class Player {
        isAlive = false;
    }
 
-   public void gainexp(int xp) {
-    experience += xp;
-       if (xp >= 100) {
+   public void gainExperience(int xp) {
+       Experience += xp;
+       if (Experience >= 100) {
            levelup();
            Experience = 0;
        }
@@ -86,7 +86,7 @@ public class Player {
                newInventario[i] = inventario[i];
            }
           inventario = newInventario;
-        
+        }
        else {
            System.out.println("El inventario ya está lleno.");
        }
